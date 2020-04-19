@@ -15,7 +15,7 @@ import { MatSelectModule } from '@angular/material/select';
   declarations: [],
   imports: [CommonModule],
   exports: [
-    ReactiveFormsModule,
+    ReactiveFormsModule, // RC: the idea of re-exporting material stuff from yours module is ok, but i dont understand why reactive form module is here
     MatToolbarModule,
     MatInputModule,
     MatCardModule,

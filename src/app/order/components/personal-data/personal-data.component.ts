@@ -24,8 +24,17 @@ import { EmailsValidationErrorStateMatcher } from '../../validation/validation';
       useExisting: forwardRef(() => PersonalDataComponent),
       multi: true
     },
+    /* RC: the thing below is somehow mix-up of different concepts. From what i see in the docs, this should be used to introduce a new custom validator directive: https://blog.thoughtram.io/angular/2016/03/14/custom-validators-in-angular-2.html
+    It indeed works but there are some things i do not like:
+    1. you end up with a control which is a validator at the same time, sounds not clean, isn't it?
+    2. you have to implement 'validate' function, which takes AbstractControl as an argument, which you even do not use, imho this is a signal that you are using Validator interface in a wrong spot
+    3. I would rather do it other way to keep things "cleaner" and make it more re-usable:
+      - i would remove Validator interface from this class and from address data
+      - if you want to tell the parent form that the value of this inner-form is invalid, just implement imperative ValidatorFn, and connect it in the parent form for this control (https://alligator.io/angular/reactive-forms-custom-validator/)
+
+    */
     {
-      provide: NG_VALIDATORS,
+      provide: NG_VALIDATORS, 
       useExisting: forwardRef(() => PersonalDataComponent),
       multi: true
     }
@@ -67,7 +76,7 @@ export class PersonalDataComponent implements OnInit, OnDestroy, ControlValueAcc
           validators: [Validators.required]
         }),
         email: new FormControl('', {
-          validators: [Validators.required, Validators.email]
+          validators: [Validators.required, Validators.email] // RC: you are missing error message for email validation
         }),
         repeatEmail: new FormControl('', {
           validators: [Validators.required, Validators.email]

@@ -82,7 +82,7 @@ export class AddressDataComponent implements OnInit, OnDestroy, ControlValueAcce
           validators: [Validators.required],
         }),
       },
-      { updateOn: 'blur' }
+      { updateOn: 'blur' } // RC: this is ok only if you want validation on blur, you can't make validation to "explode" on submit button click with it 
     );
 
     this.addressData.valueChanges.pipe(distinctUntilChanged(), takeUntil(this.destroy$)).subscribe((val) => {
