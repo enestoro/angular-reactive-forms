@@ -1,0 +1,29 @@
+<form [formGroup]="addressData">
+  <h5>{{ getAddressHeader() }}</h5>
+  <div class="container">
+    <mat-form-field>
+      <input matInput placeholder="Street" formControlName="street" />
+      <mat-error *ngIf="street?.errors?.required">Is required</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="House no" formControlName="houseNo" />
+      <mat-error *ngIf="houseNo?.errors?.required">Is required</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Zip code" formControlName="zipCode" />
+      <mat-error *ngIf="zipCode?.errors?.required">Is required</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="City" formControlName="city" />
+      <mat-error *ngIf="city?.errors?.required">Is required</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select placeholder="Country" formControlName="country">
+        <mat-option *ngFor="let country of countries" [value]="country">
+          {{ country }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="country?.errors?.required">Is required</mat-error>
+    </mat-form-field>
+  </div>
+</form>

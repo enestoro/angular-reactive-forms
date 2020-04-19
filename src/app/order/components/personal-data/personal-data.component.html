@@ -1,0 +1,21 @@
+<form [formGroup]="personalData">
+  <h5>Personal Data</h5>
+  <div class="container">
+    <mat-form-field>
+      <input matInput placeholder="First name" formControlName="firstName">
+      <mat-error *ngIf="firstName?.errors?.required">Is required</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Surname" formControlName="surname">
+      <mat-error *ngIf="surname?.errors?.required">Is required</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Email" formControlName="email">
+      <mat-error *ngIf="email?.errors?.required">Is required</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Repeat your email" formControlName="repeatEmail" [errorStateMatcher]="emailsValidationErrorStateMatcher">
+      <mat-error *ngIf="personalData?.errors?.sameEmails">Emails do not match</mat-error>
+    </mat-form-field>
+  </div>
+</form>
