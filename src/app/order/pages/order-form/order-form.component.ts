@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { BILLING_ADDRESS } from '../../address-type';
 import { MatCheckboxChange } from '@angular/material/checkbox';
+import { personalDataValid } from '../../validators/validators';
 
 @Component({
   selector: 'app-order-form',
@@ -17,8 +18,8 @@ export class OrderFormComponent implements OnInit {
 
   ngOnInit() {
     this.orderData = new FormGroup({
-      personalData: new FormControl(),
-      addressData: new FormControl(),
+      personalData: new FormControl(''),
+      addressData: new FormControl(''),
       isShippingAddressBillingAddress: new FormControl(false),
     });
   }

@@ -64,26 +64,23 @@ export class AddressDataComponent implements OnInit, OnDestroy, ControlValueAcce
   constructor() {}
 
   ngOnInit() {
-    this.addressData = new FormGroup(
-      {
-        street: new FormControl('', {
-          validators: Validators.required,
-        }),
-        houseNo: new FormControl('', {
-          validators: [Validators.required],
-        }),
-        zipCode: new FormControl('', {
-          validators: [Validators.required],
-        }),
-        city: new FormControl('', {
-          validators: [Validators.required],
-        }),
-        country: new FormControl('', {
-          validators: [Validators.required],
-        }),
-      },
-      { updateOn: 'blur' }
-    );
+    this.addressData = new FormGroup({
+      street: new FormControl('', {
+        validators: Validators.required,
+      }),
+      houseNo: new FormControl('', {
+        validators: [Validators.required],
+      }),
+      zipCode: new FormControl('', {
+        validators: [Validators.required],
+      }),
+      city: new FormControl('', {
+        validators: [Validators.required],
+      }),
+      country: new FormControl('', {
+        validators: [Validators.required],
+      }),
+    });
 
     this.addressData.valueChanges.pipe(distinctUntilChanged(), takeUntil(this.destroy$)).subscribe((val) => {
       this.onChange(val);
@@ -99,7 +96,7 @@ export class AddressDataComponent implements OnInit, OnDestroy, ControlValueAcce
   }
 
   validate(control: AbstractControl): ValidationErrors | null {
-    return this.addressData.valid ? null : { invalidForm: 'personal data invalid' };
+    return this.addressData.valid ? null : { invalidForm: 'address data invalid' };
   }
 
   writeValue(obj: any): void {

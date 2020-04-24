@@ -8,7 +8,7 @@ import {
   NG_VALUE_ACCESSOR,
   ValidationErrors,
   Validator,
-  Validators
+  Validators,
 } from '@angular/forms';
 import { distinctUntilChanged, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
@@ -22,14 +22,14 @@ import { EmailsValidationErrorStateMatcher } from '../../validation/validation';
     {
       provide: NG_VALUE_ACCESSOR,
       useExisting: forwardRef(() => PersonalDataComponent),
-      multi: true
+      multi: true,
     },
     {
       provide: NG_VALIDATORS,
       useExisting: forwardRef(() => PersonalDataComponent),
-      multi: true
-    }
-  ]
+      multi: true,
+    },
+  ],
 })
 export class PersonalDataComponent implements OnInit, OnDestroy, ControlValueAccessor, Validator {
   personalData: FormGroup;
@@ -61,22 +61,22 @@ export class PersonalDataComponent implements OnInit, OnDestroy, ControlValueAcc
     this.personalData = new FormGroup(
       {
         firstName: new FormControl('', {
-          validators: Validators.required
+          validators: Validators.required,
         }),
         surname: new FormControl('', {
-          validators: [Validators.required]
+          validators: [Validators.required],
         }),
         email: new FormControl('', {
-          validators: [Validators.required, Validators.email]
+          validators: [Validators.required, Validators.email],
         }),
         repeatEmail: new FormControl('', {
-          validators: [Validators.required, Validators.email]
-        })
+          validators: [Validators.required, Validators.email],
+        }),
       },
-      { validators: [this.checkEmails], updateOn: 'blur' }
+      { validators: [this.checkEmails] }
     );
 
-    this.personalData.valueChanges.pipe(distinctUntilChanged(), takeUntil(this.destroy$)).subscribe(val => {
+    this.personalData.valueChanges.pipe(distinctUntilChanged(), takeUntil(this.destroy$)).subscribe((val) => {
       this.onChange(val);
     });
   }

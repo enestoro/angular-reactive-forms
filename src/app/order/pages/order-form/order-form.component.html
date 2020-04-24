@@ -1,15 +1,15 @@
 <mat-card>
   <form [formGroup]="orderData">
     <app-personal-data formControlName="personalData"></app-personal-data>
+    <div class="spacer"></div>
     <app-address-data formControlName="addressData"></app-address-data>
     <mat-checkbox formControlName="isShippingAddressBillingAddress" (change)="onCheckboxChange($event)"
       >Billing and shipping address are not the same</mat-checkbox
     >
-    <app-address-data
-      *ngIf="shouldAddBillingAddress"
-      formControlName="billingAddressData"
-      [addressType]="billingAddressHeader"
-    ></app-address-data>
+    <ng-container *ngIf="shouldAddBillingAddress">
+      <div class="spacer"></div>
+      <app-address-data formControlName="billingAddressData" [addressType]="billingAddressHeader"></app-address-data>
+    </ng-container>
     <div class="order-btn">
       <button mat-raised-button color="primary" (click)="order()" [disabled]="orderData.invalid">Order</button>
     </div>
